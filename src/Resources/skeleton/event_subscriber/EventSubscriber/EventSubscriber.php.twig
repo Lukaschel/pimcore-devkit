@@ -1,0 +1,21 @@
+<?php declare(strict_types=1);
+
+namespace {{ namespace }}\EventSubscriber;
+
+{% block class_definition %}
+/**
+ * Class {{ name }}Subscriber
+ */
+class {{ name }}Subscriber extends AbstractSubscriber
+{% endblock class_definition %}
+{
+{% block class_body %}
+    /**
+     * @return string[]
+     */
+    public static function getSubscribedEvents(): array
+    {
+        return [];
+    }
+{% endblock class_body %}
+}

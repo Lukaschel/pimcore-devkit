@@ -1,0 +1,17 @@
+<?php declare(strict_types=1);
+
+namespace {{ namespace }}\EventSubscriber;
+
+{% block use_statements %}
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+{% endblock use_statements %}
+
+{% block class_definition %}
+/**
+ * Class AbstractSubscriber
+ */
+abstract class AbstractSubscriber implements EventSubscriberInterface
+{% endblock class_definition %}
+{
+{% block class_body %}{% endblock class_body %}
+}

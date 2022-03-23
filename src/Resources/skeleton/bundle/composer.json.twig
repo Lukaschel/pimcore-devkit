@@ -1,0 +1,25 @@
+{
+  "name": "{{ vendor }}",
+  "description": "{{ description }}",
+  "type": "pimcore-bundle",
+  "license": "GPL-3.0-or-later",
+  "authors": [
+    {
+      "name": "{{ company_name }}",
+      "email": "{{ authorEmail }}"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "{{ namespace|replace({'\\': '\\\\'}) }}\\": "src"
+    }
+  },
+  "extra": {
+    "pimcore": {
+      "bundles": [
+        "{{ namespace|replace({'\\': '\\\\'}) }}\\{{ name }}"
+      ]
+    }
+  },
+  "minimum-stability": "dev"
+}

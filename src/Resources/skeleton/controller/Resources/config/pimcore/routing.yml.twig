@@ -1,0 +1,7 @@
+{% block routing %}
+{% for action in actions %}
+{{ rawBundleName|lower }}.{{ name|lower }}.{{ action.name|lower }}:
+    path: /index
+    defaults: { _controller: {{ bundleName }}:{{ name }}:{{ action.name }} }
+{% endfor %}
+{% endblock routing %}

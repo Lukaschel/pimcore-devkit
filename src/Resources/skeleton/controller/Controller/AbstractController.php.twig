@@ -1,0 +1,17 @@
+<?php declare(strict_types=1);
+
+namespace {{ namespace }}\Controller;
+
+{% block use_statements %}
+use Pimcore\Controller\FrontendController;
+{% endblock use_statements %}
+
+{% block class_definition %}
+/**
+ * Class AbstractController
+ */
+abstract class AbstractController extends FrontendController
+{% endblock class_definition %}
+{
+{% block class_body %}{% endblock class_body %}
+}

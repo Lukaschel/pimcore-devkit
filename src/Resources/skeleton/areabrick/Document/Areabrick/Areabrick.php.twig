@@ -1,0 +1,21 @@
+<?php declare(strict_types=1);
+
+namespace {{ namespace }}\Document\Areabrick;
+
+{% block class_definition %}
+/**
+ * Class {{ name }}Areabrick
+ */
+class {{ name }}Areabrick extends AbstractAreabrick
+{% endblock class_definition %}
+{
+{% block class_body %}
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return "{{ backendName }}";
+    }
+{% endblock class_body %}
+}

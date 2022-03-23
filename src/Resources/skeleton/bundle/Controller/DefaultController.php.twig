@@ -1,0 +1,36 @@
+<?php declare(strict_types=1);
+
+namespace {{ namespace }}\Controller;
+
+{% block use_statements %}
+{% if 'annotation' == format -%}
+use Symfony\Component\Routing\Annotation\Route;
+{% endif %}
+use Symfony\Component\HttpFoundation\Response;
+{% endblock use_statements %}
+
+{% block class_definition %}
+/**
+ * Class DefaultController
+ */
+class DefaultController extends AbstractController
+{% endblock class_definition %}
+{
+{% block class_body %}
+    {% if 'annotation' == format -%}
+    /**
+     * @Route("/index")
+     *
+     * @return Response
+     */
+    {% else %}
+    /**
+     * @return Response
+     */
+    {% endif -%}
+    public function indexAction(): Response
+    {
+        return $this->renderTemplate('@{{ publicName }}/Default/index.html.twig', []);
+    }
+{% endblock class_body %}
+}

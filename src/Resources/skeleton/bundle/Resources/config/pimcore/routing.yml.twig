@@ -1,0 +1,12 @@
+{% block routing %}
+{% if 'annotation' == format -%}
+{{ publicName|lower }}:
+    resource: "@{{ name }}/Controller/"
+    type: annotation
+    prefix: /
+{% else %}
+{{ publicName|lower }}.default:
+    path: /index
+    defaults: { _controller: {{ name }}:Default:index }
+{% endif %}
+{% endblock routing %}

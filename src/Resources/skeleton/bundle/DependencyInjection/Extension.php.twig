@@ -1,0 +1,35 @@
+<?php declare(strict_types=1);
+
+namespace {{ namespace }}\DependencyInjection;
+
+{% block use_statements %}
+use Exception;
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+{% endblock use_statements %}
+
+{% block class_definition %}
+/**
+ * Class {{ publicName }}Extension
+ */
+class {{ publicName }}Extension extends Extension
+{% endblock class_definition %}
+{
+{% block class_body %}
+    /**
+     * @param array            $configs
+     * @param ContainerBuilder $container
+     *
+     * @throws Exception
+     *
+     * @return void
+     */
+    public function load(array $configs, ContainerBuilder $container): void
+    {
+        $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader->load('services.yml');
+    }
+{% endblock class_body %}
+}

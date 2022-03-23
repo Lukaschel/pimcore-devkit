@@ -1,0 +1,7 @@
+{% block services %}
+services:
+    # {{ namespace }} areabrick
+    {{ namespace }}\Document\Areabrick\{{ name }}Areabrick:
+        tags:
+            - { name: pimcore.area.brick, id: {{ bundleName }}_{{ name }} }
+{% endblock services %}

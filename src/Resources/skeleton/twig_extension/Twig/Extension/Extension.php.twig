@@ -1,0 +1,37 @@
+<?php declare(strict_types=1);
+
+namespace {{ namespace }}\Twig\Extension;
+
+{% block use_statements %}
+use Twig\TwigFunction;
+use Twig\Extension\AbstractExtension;
+{% endblock use_statements %}
+
+{% block class_definition %}
+/**
+ * Class {{ name }}Extension
+ */
+class {{ name }}Extension extends AbstractExtension
+{% endblock class_definition %}
+{
+{% block class_body %}
+    /**
+     * @return array|TwigFunction[]
+     */
+    public function getFunctions(): array
+    {
+        return [
+            new TwigFunction('{{ extensionName|lower }}', [$this, 'on{{ name }}'], [
+                //'is_safe' => ['html'],
+            ]),
+        ];
+    }
+
+    /**
+     * @return void
+     */
+    public function on{{ name }}(): void
+    {
+    }
+{% endblock class_body %}
+}

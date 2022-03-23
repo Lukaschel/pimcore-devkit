@@ -1,0 +1,100 @@
+<?php declare(strict_types=1);
+
+namespace {{ namespace }};
+
+{% block use_statements %}
+{% if installer %}
+use {{ namespace }}\Tool\Install;
+{% endif %}
+use Exception;
+use Pimcore\Extension\Bundle\AbstractPimcoreBundle;
+use Pimcore\Extension\Bundle\Traits\PackageVersionTrait;
+use Pimcore\HttpKernel\Bundle\DependentBundleInterface;
+use Pimcore\HttpKernel\BundleCollection\BundleCollection;
+{% endblock use_statements %}
+
+{% block class_definition %}
+/**
+ * Class {{ name }}
+ */
+class {{ name }} extends AbstractPimcoreBundle implements DependentBundleInterface
+{% endblock class_definition %}
+{
+{% block class_body %}
+    use PackageVersionTrait {
+        getVersion as traitGetVersion;
+    }
+
+    const PACKAGE_NAME = '{{ vendor }}';
+
+    /**
+     * @var array
+     */
+    private static $bundles = [];
+
+    /**
+     * @return string
+     */
+    public function getVersion(): string
+    {
+        try {
+            return $this->traitGetVersion();
+        } catch (Exception $e) {
+            return 'local';
+        }
+    }
+
+    /**
+     * @param BundleCollection $collection
+     * @throws Exception
+     */
+    public static function registerDependentBundles(BundleCollection $collection): void
+    {
+        if (!empty(self::$bundles)) {
+            foreach (self::$bundles as $bundle) {
+                if (!class_exists($bundle)) {
+                    throw new Exception(sprintf('%s is not available', $bundle));
+                }
+            }
+
+            $collection->addBundles(self::$bundles);
+        }
+    }
+
+    /**
+     * @return array
+     */
+    public function getJsPaths(): array
+    {
+        return [
+            '/bundles/{{ publicName|lower }}/js/pimcore/startup.js'
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public static function getDependentBundles(): array
+    {
+        return self::$bundles;
+    }
+
+{% if installer %}
+    /**
+     * @return Install|object|null
+     */
+    public function getInstaller()
+    {
+        return $this->container->get(Install::class);
+    }
+{% endif %}
+
+    /**
+     * @return string
+     */
+    protected function getComposerPackageName(): string
+    {
+        return self::PACKAGE_NAME;
+    }
+{% endblock class_body %}
+}

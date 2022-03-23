@@ -1,0 +1,46 @@
+<?php declare(strict_types=1);
+
+namespace {{ namespace }}\Tool;
+
+{% block use_statements %}
+use Pimcore\Extension\Bundle\Installer\SettingsStoreAwareInstaller;
+{% endblock use_statements %}
+
+{% block class_definition %}
+/**
+ * Class Install
+ */
+class Install extends SettingsStoreAwareInstaller
+{% endblock class_definition %}
+{
+{% block class_body %}
+    /**
+     * @var string
+     */
+    private $installSourcePath = __DIR__ . '/../Resources/install';
+
+    /**
+     * @return void
+     */
+    public function install(): void
+    {
+        parent::install();
+    }
+
+    /**
+     * @return string
+     */
+    protected function getInstallSourcePath(): string
+    {
+        return $this->installSourcePath;
+    }
+
+    /**
+     * @return void
+     */
+    public function uninstall(): void
+    {
+        parent::uninstall();
+    }
+{% endblock class_body %}
+}

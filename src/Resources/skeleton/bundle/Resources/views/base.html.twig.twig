@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="{{ '{{ app.request.locale }}' }}">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    {{ '{% if not document is defined or not document %}
+        {% set document = pimcore_document(1) %}
+    {% endif %}' }}
+    {{ '{% if document is instanceof("\\Pimcore\\Model\\Document\\Link") %}
+        {% set document = document.getObject() %}
+    {% endif %}' }}
+    {{ '{% if document.getTitle() is not empty %}
+        {% do pimcore_head_title().set(document.getTitle()) %}
+    {% endif %}'}}
+    {{ '{% if document.getDescription() is not empty %}
+        {% do pimcore_head_meta().setDescription(document.getDescription()) %}
+    {% endif %}' }}
+    {{ '{% block supervisor_dashboard_default_layout_head_meta deferred %}
+    {{ pimcore_head_title() }}
+    {{ pimcore_head_meta() }}
+    {% endblock supervisor_dashboard_default_layout_head_meta %}' }}
+    {{ '{% block supervisor_dashboard_default_stylesheets deferred %}
+    {{ pimcore_head_link() }}
+    {% endblock supervisor_dashboard_default_stylesheets %}' }}
+    <link rel="apple-touch-icon" sizes="57x57" href="{{ '{{ asset(\'bundles/' ~ publicName|lower ~ '/img/favicon/apple-icon-57x57.png\') }}' }}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{{ '{{ asset(\'bundles/' ~ publicName|lower ~ '/img/favicon/apple-icon-60x60.png\') }}' }}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ '{{ asset(\'bundles/' ~ publicName|lower ~ '/img/favicon/apple-icon-72x72.png\') }}' }}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ '{{ asset(\'bundles/' ~ publicName|lower ~ '/img/favicon/apple-icon-76x76.png\') }}' }}">
+    <link rel="apple-touch-icon" sizes="114x114"
+          href="{{ '{{ asset(\'bundles/' ~ publicName|lower ~ '/img/favicon/apple-icon-114x114.png\') }}' }}">
+    <link rel="apple-touch-icon" sizes="120x120"
+          href="{{ '{{ asset(\'bundles/' ~ publicName|lower ~ '/img/favicon/apple-icon-120x120.png\') }}' }}">
+    <link rel="apple-touch-icon" sizes="144x144"
+          href="{{ '{{ asset(\'bundles/' ~ publicName|lower ~ '/img/favicon/apple-icon-144x144.png\') }}' }}">
+    <link rel="apple-touch-icon" sizes="152x152"
+          href="{{ '{{ asset(\'bundles/' ~ publicName|lower ~ '/img/favicon/apple-icon-152x152.png\') }}' }}">
+    <link rel="apple-touch-icon" sizes="180x180"
+          href="{{ '{{ asset(\'bundles/' ~ publicName|lower ~ '/img/favicon/apple-icon-180x180.png\') }}' }}">
+    <link rel="icon" type="image/png" sizes="192x192"
+          href="{{ '{{ asset(\'bundles/' ~ publicName|lower ~ '/img/favicon/android-icon-192x192.png\') }}' }}">
+    <link rel="icon" type="image/png" sizes="32x32"
+          href="{{ '{{ asset(\'bundles/' ~ publicName|lower ~ '/img/favicon/favicon-32x32.png\') }}' }}">
+    <link rel="icon" type="image/png" sizes="96x96"
+          href="{{ '{{ asset(\'bundles/' ~ publicName|lower ~ '/img/favicon/favicon-96x96.png\') }}' }}">
+    <link rel="icon" type="image/png" sizes="16x16"
+          href="{{ '{{ asset(\'bundles/' ~ publicName|lower ~ '/img/favicon/favicon-16x16.png\') }}' }}">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="{{ '{{ asset(\'bundles/' ~ publicName|lower ~ '/img/favicon//ms-icon-144x144.png\') }}' }}">
+    <meta name="theme-color" content="#ffffff">
+    {{ '
+    {% do pimcore_head_link().appendStylesheet(asset("/bundles/' ~ publicName|lower ~ '/build/main.css")) %}
+    ' }}
+</head>
+
+<body>
+{{ '
+{% block header %}
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+
+                </div>
+            </div>
+        </div>
+    </header>
+{% endblock header %}
+{% block content %}
+    <main>
+    </main>
+{% endblock content %}
+{% block footer %}
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+
+                </div>
+            </div>
+        </div>
+    </footer>
+{% endblock footer %}
+{% block javascripts deferred %}
+{{ pimcore_head_script() }}
+{% endblock javascripts %}
+{% do pimcore_head_script().appendFile(asset("/bundles/' ~ publicName|lower ~ '/build/main.js")) %}
+</body>
+</html>
+' }}

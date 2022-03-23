@@ -1,0 +1,29 @@
+{
+  "name": "lukaschel/pimcore-devkit",
+  "description": "PimcoreDevkitBundle bundle to generate, bundles, controllers, event subscribers, areabricks ...",
+  "keywords": ["pimcore", "bundle generation", "generator"],
+  "type": "pimcore-bundle",
+  "license": "GPL-3.0-or-later",
+  "authors": [
+    {
+      "name": "Lukaschel",
+      "email": "lukaschel33@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Lukaschel\\PimcoreDevkitBundle\\": "src"
+    }
+  },
+  "extra": {
+    "pimcore": {
+      "bundles": [
+        "Lukaschel\\PimcoreDevkitBundle\\PimcoreDevkitBundle"
+      ]
+    }
+  },
+  "minimum-stability": "dev",
+  "require": {
+    "pimcore/pimcore": "^10"
+  }
+}

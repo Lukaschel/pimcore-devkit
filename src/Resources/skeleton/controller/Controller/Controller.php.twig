@@ -1,0 +1,34 @@
+<?php declare(strict_types=1);
+
+namespace {{ namespace }}\Controller;
+
+{% block use_statements %}
+{% if 'annotation' == route_format -%}
+use Symfony\Component\Routing\Annotation\Route;
+{% endif %}
+use Symfony\Component\HttpFoundation\Response;
+{% endblock use_statements %}
+
+{% block class_definition %}
+/**
+ * Class {{ name }}Controller
+ */
+class {{ name }}Controller extends AbstractController
+{% endblock class_definition %}
+{
+{% block class_body %}
+{% for action in actions %}
+    {% if 'annotation' == route_format -%}
+    /**
+     * @return Response
+     *
+     * @Route("{{ action.route }}")
+     */
+    {% endif -%}
+    public function {{ action.name }}({%- if action.placeholders|length > 0 -%}${{- action.placeholders|join(', $') -}}{%- endif -%}): Response
+    {
+        return $this->renderTemplate('@{{ rawBundleName }}/{{ name }}/{{ action.name|slice(0, -6) }}.html.twig');
+    }
+{% endfor -%}
+{% endblock class_body %}
+}

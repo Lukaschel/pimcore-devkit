@@ -1,0 +1,26 @@
+<?php declare(strict_types=1);
+
+namespace {{ namespace }}\DependencyInjection;
+
+{% block use_statements %}
+use Symfony\Component\Config\Definition\Builder\TreeBuilder;
+use Symfony\Component\Config\Definition\ConfigurationInterface;
+{% endblock use_statements %}
+
+{% block class_definition %}
+/**
+ * Class Configuration
+ */
+class Configuration implements ConfigurationInterface
+{% endblock class_definition %}
+{
+{% block class_body %}
+    /**
+     * @return TreeBuilder
+     */
+    public function getConfigTreeBuilder(): Treebuilder
+    {
+        return new TreeBuilder('{{ publicName|lower }}');
+    }
+{% endblock class_body %}
+}

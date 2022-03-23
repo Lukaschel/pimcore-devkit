@@ -1,0 +1,25 @@
+<?php declare(strict_types=1);
+
+namespace {{ namespace }}\Document\Areabrick;
+
+{% block use_statements %}
+use Pimcore\Extension\Document\Areabrick\AbstractTemplateAreabrick;
+{% endblock use_statements %}
+
+{% block class_definition %}
+/**
+ * Class AbstractAreabrick
+ */
+abstract class AbstractAreabrick extends AbstractTemplateAreabrick
+{% endblock class_definition %}
+{
+{% block class_body %}
+    /**
+     * @return string
+     */
+    public function getTemplateLocation(): string
+    {
+        return static::TEMPLATE_LOCATION_BUNDLE;
+    }
+{% endblock class_body %}
+}
